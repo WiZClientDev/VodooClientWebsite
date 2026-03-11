@@ -279,6 +279,21 @@
       display: flex; align-items: center; justify-content: center; gap: 8px;
     }
     .card-dl-btn:hover { background: var(--accent); color: #fff; }
+    .card-dl-btn.alt { border-color: var(--muted); color: var(--muted); }
+    .card-dl-btn.alt:hover { background: var(--muted); color: #fff; }
+
+    .dl-options { display: flex; gap: 12px; }
+    .dl-option { display: flex; flex-direction: column; align-items: center; gap: 5px; flex: 1; }
+    .dl-option .card-dl-btn { width: 100%; }
+
+    .dl-recommended {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.6rem; letter-spacing: 2px;
+      color: var(--accent3);
+      text-transform: uppercase;
+      opacity: 0.85;
+    }
+
     .card-dl-btn.red { border-color: var(--accent2); color: var(--accent2); }
     .card-dl-btn.red:hover { background: var(--accent2); color: #fff; }
 
@@ -428,7 +443,15 @@
       <div class="card-tags">
         <span class="tag">KillAura</span><span class="tag">Velocity</span><span class="tag">Reach</span><span class="tag green">Bypass</span>
       </div>
-      <button class="card-dl-btn" onclick="handleDownload(this,'MC Ghost')">⬇ Download Ghost</button>
+      <div class="dl-options">
+        <div class="dl-option">
+          <a href="https://direct-link.net/1223974/0T99i058jxf8" target="_blank" class="card-dl-btn">⬇ Linkvertise</a>
+          <span class="dl-recommended">★ recommended</span>
+        </div>
+        <div class="dl-option">
+          <button class="card-dl-btn alt" onclick="handleDownload(this,'MC Ghost work.ink')">⬇ work.ink</button>
+        </div>
+      </div>
     </div>
 
     <div class="download-card reveal">

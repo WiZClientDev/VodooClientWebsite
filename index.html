@@ -92,8 +92,17 @@
       color: var(--muted); text-decoration: none;
       font-size: 0.95rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase;
       transition: color 0.2s;
+      position: relative;
+    }
+    nav ul a::after {
+      content: '';
+      position: absolute; bottom: -3px; left: 0; right: 0; height: 1px;
+      background: var(--accent);
+      transform: scaleX(0); transform-origin: left;
+      transition: transform 0.25s ease;
     }
     nav ul a:hover { color: var(--text); }
+    nav ul a:hover::after { transform: scaleX(1); }
 
     /* FX TOGGLE */
     .anim-toggle {
@@ -294,12 +303,57 @@
       border: 1px solid var(--accent); color: var(--accent);
       font-family: 'Rajdhani', sans-serif;
       font-size: 0.95rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase;
-      cursor: pointer; transition: background 0.2s, color 0.2s;
+      cursor: pointer;
+      transition: background 0.25s, color 0.25s, box-shadow 0.25s, transform 0.15s;
       display: flex; align-items: center; justify-content: center; gap: 8px;
+      text-decoration: none; /* fix anchor underline */
+      white-space: nowrap;   /* keep arrow + text on one line */
+      flex-direction: row;
     }
-    .card-dl-btn:hover { background: var(--accent); color: #fff; }
+    .card-dl-btn:hover {
+      background: var(--accent); color: #fff;
+      box-shadow: 0 0 18px rgba(123,47,255,0.45);
+      transform: translateY(-2px);
+    }
+    .card-dl-btn:active { transform: translateY(0); }
+
     .card-dl-btn.alt { border-color: var(--muted); color: var(--muted); }
-    .card-dl-btn.alt:hover { background: var(--muted); color: #fff; }
+    .card-dl-btn.alt:hover {
+      background: var(--muted); color: #fff;
+      box-shadow: 0 0 18px rgba(96,96,160,0.4);
+    }
+    .card-dl-btn.red { border-color: var(--accent2); color: var(--accent2); }
+    .card-dl-btn.red:hover {
+      background: var(--accent2); color: #fff;
+      box-shadow: 0 0 18px rgba(255,47,123,0.45);
+      transform: translateY(-2px);
+    }
+
+    /* hover on tags */
+    .tag {
+      transition: background 0.2s, border-color 0.2s, color 0.2s, transform 0.15s;
+      cursor: default;
+    }
+    .tag:hover {
+      background: rgba(123,47,255,0.25);
+      border-color: rgba(123,47,255,0.6);
+      transform: translateY(-1px);
+    }
+    .tag.red:hover  { background: rgba(255,47,123,0.2);  border-color: rgba(255,47,123,0.6); }
+    .tag.green:hover{ background: rgba(47,255,178,0.2);  border-color: rgba(47,255,178,0.6); }
+
+    /* hover on stat boxes */
+    .stat-box {
+      transition: background 0.25s, transform 0.2s;
+      cursor: default;
+    }
+    .stat-box:hover {
+      background: rgba(123,47,255,0.1);
+      transform: translateY(-3px);
+    }
+
+    /* hover on card badges */
+    .card-game-badge { transition: border-color 0.2s, color 0.2s; }
 
     .dl-options { display: flex; gap: 12px; }
     .dl-option { display: flex; flex-direction: column; align-items: center; gap: 5px; flex: 1; }
@@ -312,9 +366,6 @@
       text-transform: uppercase;
       opacity: 0.85;
     }
-
-    .card-dl-btn.red { border-color: var(--accent2); color: var(--accent2); }
-    .card-dl-btn.red:hover { background: var(--accent2); color: #fff; }
 
     .addon-card {
       grid-column: 1 / -1;

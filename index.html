@@ -3,9 +3,28 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Security headers -->
+  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+  <meta http-equiv="X-Frame-Options" content="DENY" />
+  <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
+  <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()" />
+  <meta http-equiv="Content-Security-Policy" content="
+    default-src 'self';
+    script-src 'self' 'unsafe-inline';
+    style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+    font-src https://fonts.gstatic.com;
+    img-src 'self' https://i.imgur.com data:;
+    connect-src 'none';
+    frame-src 'none';
+    object-src 'none';
+    base-uri 'self';
+    form-action 'none';
+  " />
   <title>VoodooClient</title>
   <link rel="shortcut icon" href="https://i.imgur.com/kT5VnmO.png" />
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Rajdhani:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin="anonymous" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Rajdhani:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet" crossorigin="anonymous" />
   <style>
     :root {
       --bg: #050508;
@@ -445,11 +464,11 @@
       </div>
       <div class="dl-options">
         <div class="dl-option">
-          <a href="https://direct-link.net/1223974/0T99i058jxf8" target="_blank" class="card-dl-btn">⬇ Linkvertise</a>
+          <a href="https://direct-link.net/1223974/0T99i058jxf8" target="_blank" rel="noopener noreferrer" class="card-dl-btn">⬇ Linkvertise</a>
           <span class="dl-recommended">★ recommended</span>
         </div>
         <div class="dl-option">
-          <button class="card-dl-btn alt" onclick="handleDownload(this,'MC Ghost work.ink')">⬇ work.ink</button>
+          <a href="https://work.ink/2mME/voodoclient-ghost" target="_blank" rel="noopener noreferrer" class="card-dl-btn alt">⬇ work.ink</a>
         </div>
       </div>
     </div>
@@ -527,12 +546,12 @@
   }, { threshold: 0.1 });
   revEls.forEach(r => revObs.observe(r));
 
-  /* ── DOWNLOAD BUTTON ── */
+  /* ── DOWNLOAD BUTTON feedback (no innerHTML with user input) ── */
   function handleDownload(btn, name) {
-    const orig = btn.innerHTML;
-    btn.innerHTML = '✓ Preparing Download...';
+    const orig = btn.textContent;
+    btn.textContent = '✓ Preparing Download...';
     btn.disabled = true;
-    setTimeout(() => { btn.innerHTML = orig; btn.disabled = false; }, 2000);
+    setTimeout(() => { btn.textContent = '⬇ ' + orig.replace('⬇ ', ''); btn.disabled = false; }, 2000);
   }
 
   /* ═══════════════════════════════════════

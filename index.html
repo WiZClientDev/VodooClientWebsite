@@ -3,42 +3,28 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <!-- Security headers -->
-  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
-  <meta http-equiv="X-Frame-Options" content="DENY" />
-  <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
-  <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()" />
-  <meta http-equiv="Content-Security-Policy" content="
-    default-src 'self';
-    script-src 'self' 'unsafe-inline';
-    style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
-    font-src https://fonts.gstatic.com;
-    img-src 'self' https://i.imgur.com data:;
-    connect-src 'none';
-    frame-src 'none';
-    object-src 'none';
-    base-uri 'self';
-    form-action 'none';
-  " />
   <title>VoodooClient</title>
-  <link rel="shortcut icon" href="https://i.imgur.com/kT5VnmO.png" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin="anonymous" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Rajdhani:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet" crossorigin="anonymous" />
+
+  <!-- Favicon: voodoo doll emoji as inline SVG — always works, no hotlink issues -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='85'>🪆</text></svg>" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Rajdhani:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet" />
+
   <style>
     :root {
-      --bg: #050508;
-      --surface: #0c0c14;
-      --card: #10101c;
-      --border: #1e1e38;
-      --accent: #7b2fff;
+      --bg:      #050508;
+      --card:    #10101c;
+      --border:  #1e1e38;
+      --accent:  #7b2fff;
       --accent2: #ff2f7b;
       --accent3: #2fffb2;
-      --text: #e8e8f0;
-      --muted: #6060a0;
+      --text:    #e8e8f0;
+      --muted:   #6060a0;
     }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
       background: var(--bg);
@@ -49,91 +35,75 @@
     }
 
     body::before {
-      content: '';
-      position: fixed; inset: 0;
+      content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 0;
       background:
-        radial-gradient(ellipse 80% 60% at 20% 10%, rgba(123,47,255,0.12) 0%, transparent 60%),
-        radial-gradient(ellipse 60% 50% at 80% 90%, rgba(255,47,123,0.08) 0%, transparent 60%),
-        radial-gradient(ellipse 50% 40% at 50% 50%, rgba(47,255,178,0.04) 0%, transparent 70%);
-      pointer-events: none; z-index: 0;
+        radial-gradient(ellipse 80% 60% at 20% 10%, rgba(123,47,255,.12) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 50% at 80% 90%, rgba(255,47,123,.08) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 40% at 50% 50%, rgba(47,255,178,.04) 0%, transparent 70%);
     }
 
     body::after {
-      content: '';
-      position: fixed; inset: 0;
+      content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 0;
       background-image:
-        linear-gradient(rgba(123,47,255,0.04) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(123,47,255,0.04) 1px, transparent 1px);
+        linear-gradient(rgba(123,47,255,.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(123,47,255,.04) 1px, transparent 1px);
       background-size: 60px 60px;
-      pointer-events: none; z-index: 0;
     }
 
-    /* NAV */
+    /* ── NAV ── */
     nav {
-      position: fixed; top: 0; left: 0; right: 0;
-      z-index: 100;
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       display: flex; align-items: center; justify-content: space-between; gap: 16px;
       padding: 18px 48px;
-      background: rgba(5,5,8,0.85);
+      background: rgba(5,5,8,.88);
       backdrop-filter: blur(16px);
       border-bottom: 1px solid var(--border);
     }
 
     .nav-logo {
       font-family: 'Cinzel Decorative', serif;
-      font-size: 1.3rem; font-weight: 900;
+      font-size: 1.3rem; font-weight: 900; letter-spacing: 2px; flex-shrink: 0;
       background: linear-gradient(135deg, var(--accent), var(--accent2));
       -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-      letter-spacing: 2px; flex-shrink: 0;
     }
 
     nav ul { list-style: none; display: flex; gap: 36px; }
+
     nav ul a {
-      color: var(--muted); text-decoration: none;
-      font-size: 0.95rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase;
-      transition: color 0.2s;
       position: relative;
+      color: var(--muted); text-decoration: none;
+      font-size: .9rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase;
+      transition: color .25s;
     }
     nav ul a::after {
-      content: '';
-      position: absolute; bottom: -3px; left: 0; right: 0; height: 1px;
+      content: ''; position: absolute; bottom: -4px; left: 0; right: 0; height: 1px;
       background: var(--accent);
       transform: scaleX(0); transform-origin: left;
-      transition: transform 0.25s ease;
+      transition: transform .25s ease;
     }
     nav ul a:hover { color: var(--text); }
     nav ul a:hover::after { transform: scaleX(1); }
 
-    /* FX TOGGLE */
+    /* ── FX TOGGLE ── */
     .anim-toggle {
       display: inline-flex; align-items: center; gap: 8px;
-      padding: 7px 16px;
-      background: transparent;
-      border: 1px solid var(--border);
-      color: var(--muted);
+      padding: 7px 16px; flex-shrink: 0;
+      background: transparent; border: 1px solid var(--border); color: var(--muted);
       font-family: 'Share Tech Mono', monospace;
-      font-size: 0.68rem; letter-spacing: 2px; text-transform: uppercase;
-      cursor: pointer; flex-shrink: 0;
+      font-size: .68rem; letter-spacing: 2px; text-transform: uppercase;
+      cursor: pointer;
       clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
-      transition: border-color 0.25s, color 0.25s, background 0.25s;
+      transition: border-color .25s, color .25s, background .25s;
     }
     .anim-toggle:hover { border-color: var(--accent); color: var(--accent); }
-    .anim-toggle.on {
-      border-color: var(--accent2); color: var(--accent2);
-      background: rgba(255,47,123,0.07);
-    }
+    .anim-toggle.on { border-color: var(--accent2); color: var(--accent2); background: rgba(255,47,123,.07); }
     .anim-toggle .tdot {
-      width: 7px; height: 7px; border-radius: 50%;
-      background: var(--muted); flex-shrink: 0;
-      transition: background 0.25s, box-shadow 0.25s;
+      width: 7px; height: 7px; border-radius: 50%; background: var(--muted); flex-shrink: 0;
+      transition: background .25s, box-shadow .25s;
     }
-    .anim-toggle.on .tdot {
-      background: var(--accent2);
-      box-shadow: 0 0 8px var(--accent2);
-      animation: pulse 2s infinite;
-    }
+    .anim-toggle.on .tdot { background: var(--accent2); box-shadow: 0 0 8px var(--accent2); animation: pulse 2s infinite; }
 
-    /* HERO */
+    /* ── HERO ── */
     .hero {
       position: relative; z-index: 1;
       min-height: 100vh;
@@ -143,9 +113,9 @@
 
     .hero-eyebrow {
       font-family: 'Share Tech Mono', monospace;
-      font-size: 0.75rem; letter-spacing: 6px; color: var(--accent3);
+      font-size: .75rem; letter-spacing: 6px; color: var(--accent3);
       text-transform: uppercase; margin-bottom: 24px;
-      animation: fadeUp 0.8s ease both;
+      animation: fadeUp .8s ease both;
     }
 
     .hero-title {
@@ -153,19 +123,19 @@
       font-size: clamp(3rem, 10vw, 7rem); font-weight: 900; line-height: 1;
       background: linear-gradient(135deg, #fff 0%, var(--accent) 50%, var(--accent2) 100%);
       -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-      animation: fadeUp 0.8s 0.1s ease both;
-      filter: drop-shadow(0 0 60px rgba(123,47,255,0.3));
+      animation: fadeUp .8s .1s ease both;
+      filter: drop-shadow(0 0 60px rgba(123,47,255,.3));
     }
 
     .hero-sub {
       margin-top: 24px; font-size: 1.15rem; color: var(--muted);
       letter-spacing: 3px; font-weight: 500; text-transform: uppercase;
-      animation: fadeUp 0.8s 0.2s ease both;
+      animation: fadeUp .8s .2s ease both;
     }
 
     .hero-buttons {
       margin-top: 48px; display: flex; gap: 16px; flex-wrap: wrap; justify-content: center;
-      animation: fadeUp 0.8s 0.3s ease both;
+      animation: fadeUp .8s .3s ease both;
     }
 
     .btn-primary {
@@ -176,9 +146,9 @@
       font-size: 1rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
       text-decoration: none; border: none; cursor: pointer;
       clip-path: polygon(12px 0%, 100% 0%, calc(100% - 12px) 100%, 0% 100%);
-      transition: opacity 0.2s, transform 0.2s;
+      transition: opacity .2s, transform .2s, box-shadow .2s;
     }
-    .btn-primary:hover { opacity: 0.85; transform: translateY(-2px); }
+    .btn-primary:hover { opacity: .85; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(123,47,255,.35); }
 
     .btn-outline {
       display: inline-flex; align-items: center; gap: 8px;
@@ -187,10 +157,11 @@
       font-size: 1rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
       text-decoration: none; border: 1px solid var(--accent); cursor: pointer;
       clip-path: polygon(12px 0%, 100% 0%, calc(100% - 12px) 100%, 0% 100%);
-      transition: background 0.2s, color 0.2s;
+      transition: background .2s, color .2s, box-shadow .2s, transform .2s;
     }
-    .btn-outline:hover { background: rgba(123,47,255,0.15); }
+    .btn-outline:hover { background: rgba(123,47,255,.15); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(123,47,255,.2); }
 
+    /* ── SECTIONS ── */
     section {
       position: relative; z-index: 1;
       padding: 100px 24px; max-width: 1200px; margin: 0 auto;
@@ -198,7 +169,7 @@
 
     .section-label {
       font-family: 'Share Tech Mono', monospace;
-      font-size: 0.7rem; letter-spacing: 6px; color: var(--accent3);
+      font-size: .7rem; letter-spacing: 6px; color: var(--accent3);
       text-transform: uppercase; margin-bottom: 12px;
     }
 
@@ -209,10 +180,7 @@
       -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
     }
 
-    .section-desc {
-      color: var(--muted); font-size: 1.05rem;
-      max-width: 560px; line-height: 1.6; margin-bottom: 56px;
-    }
+    .section-desc { color: var(--muted); font-size: 1.05rem; max-width: 560px; line-height: 1.6; margin-bottom: 56px; }
 
     .divider {
       position: relative; z-index: 1; height: 1px;
@@ -220,7 +188,7 @@
       max-width: 1200px; margin: 0 auto;
     }
 
-    /* CARDS */
+    /* ── DOWNLOAD CARDS ── */
     .downloads-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -229,147 +197,119 @@
 
     .download-card {
       background: var(--card); border: 1px solid var(--border);
-      padding: 32px; position: relative; overflow: hidden;
-      transition: border-color 0.3s, transform 0.3s;
+      padding: 32px; position: relative; overflow: visible; /* visible so links aren't cut */
+      transition: border-color .3s, transform .3s, box-shadow .3s;
       clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 20px 100%, 0 calc(100% - 20px));
     }
+
+    /* inner glow on hover */
     .download-card::before {
-      content: ''; position: absolute; inset: 0;
-      background: radial-gradient(ellipse 80% 80% at 50% 0%, rgba(123,47,255,0.08), transparent 70%);
-      opacity: 0; transition: opacity 0.3s;
+      content: ''; position: absolute; inset: 0; pointer-events: none;
+      background: radial-gradient(ellipse 80% 80% at 50% 0%, rgba(123,47,255,.08), transparent 70%);
+      opacity: 0; transition: opacity .3s; z-index: 0;
     }
-    .download-card:hover { border-color: var(--accent); transform: translateY(-4px); }
+    .download-card:hover { border-color: var(--accent); transform: translateY(-4px); box-shadow: 0 12px 40px rgba(123,47,255,.15); }
     .download-card:hover::before { opacity: 1; }
+
+    /* corner chip */
     .download-card::after {
-      content: ''; position: absolute; top: 0; right: 0;
+      content: ''; position: absolute; top: 0; right: 0; pointer-events: none;
       width: 20px; height: 20px; background: var(--border);
-      clip-path: polygon(0 0, 100% 100%, 100% 0); transition: background 0.3s;
+      clip-path: polygon(0 0, 100% 100%, 100% 0); transition: background .3s; z-index: 1;
     }
     .download-card:hover::after { background: var(--accent); }
 
-    /* needle pierce — only visible when fx-on */
+    /* make all card children sit above the ::before glow */
+    .download-card > * { position: relative; z-index: 1; }
+
+    /* needle pierce */
     .needle-pierce {
-      position: absolute; top: -24px; right: 24px;
+      position: absolute; top: -24px; right: 24px; z-index: 2;
       font-size: 1.6rem; opacity: 0;
       transform: rotate(-45deg) translateY(-20px);
       pointer-events: none;
-      filter: drop-shadow(0 0 6px rgba(255,47,123,0.8));
-      transition: opacity 0.3s, transform 0.3s;
+      filter: drop-shadow(0 0 6px rgba(255,47,123,.8));
+      transition: opacity .3s, transform .3s;
     }
-    body.fx-on .download-card:hover .needle-pierce {
-      opacity: 1; transform: rotate(-45deg) translateY(0px);
-    }
+    body.fx-on .download-card:hover .needle-pierce { opacity: 1; transform: rotate(-45deg) translateY(0); }
 
     .card-game-badge {
       display: inline-flex; align-items: center; gap: 6px;
       padding: 4px 12px; border: 1px solid var(--border);
       font-family: 'Share Tech Mono', monospace;
-      font-size: 0.65rem; letter-spacing: 3px; color: var(--muted);
+      font-size: .65rem; letter-spacing: 3px; color: var(--muted);
       text-transform: uppercase; margin-bottom: 20px;
+      transition: border-color .2s, color .2s;
     }
-    .card-game-badge.cs2   { border-color: rgba(255,165,0,0.4); color: #ffa500; }
-    .card-game-badge.mc    { border-color: rgba(47,255,178,0.4); color: var(--accent3); }
-    .card-game-badge.addon { border-color: rgba(255,47,123,0.4); color: var(--accent2); }
+    .card-game-badge.cs2   { border-color: rgba(255,165,0,.4); color: #ffa500; }
+    .card-game-badge.mc    { border-color: rgba(47,255,178,.4); color: var(--accent3); }
+    .card-game-badge.addon { border-color: rgba(255,47,123,.4); color: var(--accent2); }
 
     .card-icon { font-size: 2.5rem; margin-bottom: 16px; display: block; }
 
-    .card-title {
-      font-family: 'Rajdhani', sans-serif;
-      font-size: 1.5rem; font-weight: 700; color: #fff;
-      margin-bottom: 8px; letter-spacing: 1px;
-    }
+    .card-title { font-family: 'Rajdhani', sans-serif; font-size: 1.5rem; font-weight: 700; color: #fff; margin-bottom: 8px; letter-spacing: 1px; }
 
-    .card-version {
-      font-family: 'Share Tech Mono', monospace;
-      font-size: 0.75rem; color: var(--accent);
-      margin-bottom: 12px; letter-spacing: 2px;
-    }
+    .card-version { font-family: 'Share Tech Mono', monospace; font-size: .75rem; color: var(--accent); margin-bottom: 12px; letter-spacing: 2px; }
 
-    .card-desc { color: var(--muted); font-size: 0.95rem; line-height: 1.6; margin-bottom: 28px; }
+    .card-desc { color: var(--muted); font-size: .95rem; line-height: 1.6; margin-bottom: 28px; }
 
     .card-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 28px; }
 
     .tag {
       padding: 3px 10px;
-      background: rgba(123,47,255,0.12); border: 1px solid rgba(123,47,255,0.25);
-      font-size: 0.72rem; font-family: 'Share Tech Mono', monospace;
+      background: rgba(123,47,255,.12); border: 1px solid rgba(123,47,255,.25);
+      font-size: .72rem; font-family: 'Share Tech Mono', monospace;
       color: var(--accent); letter-spacing: 1px;
+      transition: background .2s, border-color .2s, transform .15s;
+      cursor: default;
     }
-    .tag.red   { background: rgba(255,47,123,0.1);  border-color: rgba(255,47,123,0.25);  color: var(--accent2); }
-    .tag.green { background: rgba(47,255,178,0.1);  border-color: rgba(47,255,178,0.25);  color: var(--accent3); }
+    .tag:hover { background: rgba(123,47,255,.25); border-color: rgba(123,47,255,.55); transform: translateY(-1px); }
+    .tag.red   { background: rgba(255,47,123,.1);  border-color: rgba(255,47,123,.25);  color: var(--accent2); }
+    .tag.red:hover   { background: rgba(255,47,123,.25);  border-color: rgba(255,47,123,.55); }
+    .tag.green { background: rgba(47,255,178,.1);  border-color: rgba(47,255,178,.25);  color: var(--accent3); }
+    .tag.green:hover { background: rgba(47,255,178,.25);  border-color: rgba(47,255,178,.55); }
 
+    /* ── DOWNLOAD BUTTONS ── */
+    /* shared base — works for both <button> and <a> */
     .card-dl-btn {
-      width: 100%; padding: 12px; background: transparent;
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      width: 100%; padding: 13px 16px;
+      background: transparent;
       border: 1px solid var(--accent); color: var(--accent);
       font-family: 'Rajdhani', sans-serif;
-      font-size: 0.95rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase;
+      font-size: .95rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase;
+      text-decoration: none; /* critical for <a> */
       cursor: pointer;
-      transition: background 0.25s, color 0.25s, box-shadow 0.25s, transform 0.15s;
-      display: flex; align-items: center; justify-content: center; gap: 8px;
-      text-decoration: none; /* fix anchor underline */
-      white-space: nowrap;   /* keep arrow + text on one line */
-      flex-direction: row;
+      white-space: nowrap;
+      transition: background .25s, color .25s, box-shadow .25s, transform .15s, border-color .25s;
     }
     .card-dl-btn:hover {
       background: var(--accent); color: #fff;
-      box-shadow: 0 0 18px rgba(123,47,255,0.45);
+      box-shadow: 0 0 20px rgba(123,47,255,.5);
       transform: translateY(-2px);
     }
     .card-dl-btn:active { transform: translateY(0); }
 
-    .card-dl-btn.alt { border-color: var(--muted); color: var(--muted); }
-    .card-dl-btn.alt:hover {
-      background: var(--muted); color: #fff;
-      box-shadow: 0 0 18px rgba(96,96,160,0.4);
-    }
-    .card-dl-btn.red { border-color: var(--accent2); color: var(--accent2); }
-    .card-dl-btn.red:hover {
-      background: var(--accent2); color: #fff;
-      box-shadow: 0 0 18px rgba(255,47,123,0.45);
-      transform: translateY(-2px);
-    }
+    .card-dl-btn.red   { border-color: var(--accent2); color: var(--accent2); }
+    .card-dl-btn.red:hover   { background: var(--accent2); color: #fff; box-shadow: 0 0 20px rgba(255,47,123,.5); }
 
-    /* hover on tags */
-    .tag {
-      transition: background 0.2s, border-color 0.2s, color 0.2s, transform 0.15s;
-      cursor: default;
-    }
-    .tag:hover {
-      background: rgba(123,47,255,0.25);
-      border-color: rgba(123,47,255,0.6);
-      transform: translateY(-1px);
-    }
-    .tag.red:hover  { background: rgba(255,47,123,0.2);  border-color: rgba(255,47,123,0.6); }
-    .tag.green:hover{ background: rgba(47,255,178,0.2);  border-color: rgba(47,255,178,0.6); }
+    .card-dl-btn.alt   { border-color: var(--muted); color: var(--muted); }
+    .card-dl-btn.alt:hover   { background: var(--muted); color: #fff; box-shadow: 0 0 20px rgba(96,96,160,.4); }
 
-    /* hover on stat boxes */
-    .stat-box {
-      transition: background 0.25s, transform 0.2s;
-      cursor: default;
-    }
-    .stat-box:hover {
-      background: rgba(123,47,255,0.1);
-      transform: translateY(-3px);
-    }
-
-    /* hover on card badges */
-    .card-game-badge { transition: border-color 0.2s, color 0.2s; }
-
+    /* two-option layout for Ghost card */
     .dl-options { display: flex; gap: 12px; }
-    .dl-option { display: flex; flex-direction: column; align-items: center; gap: 5px; flex: 1; }
-    .dl-option .card-dl-btn { width: 100%; }
+    .dl-option  { display: flex; flex-direction: column; align-items: center; gap: 6px; flex: 1; }
 
     .dl-recommended {
       font-family: 'Share Tech Mono', monospace;
-      font-size: 0.6rem; letter-spacing: 2px;
-      color: var(--accent3);
-      text-transform: uppercase;
-      opacity: 0.85;
+      font-size: .6rem; letter-spacing: 2px; color: var(--accent3);
+      text-transform: uppercase; opacity: .9;
     }
 
+    /* ── ADDON CARD ── */
     .addon-card {
       grid-column: 1 / -1;
-      background: linear-gradient(135deg, rgba(255,47,123,0.06), rgba(123,47,255,0.06));
+      background: linear-gradient(135deg, rgba(255,47,123,.06), rgba(123,47,255,.06));
       display: grid; grid-template-columns: 1fr auto; gap: 32px; align-items: center;
     }
 
@@ -379,35 +319,32 @@
       nav { padding: 16px 20px; }
     }
 
-    /* STATS */
+    /* ── STATS ── */
     .stats-row {
       display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
       gap: 2px; margin-top: 80px; border: 1px solid var(--border);
     }
-    .stat-box { padding: 32px; background: var(--card); text-align: center; }
+    .stat-box {
+      padding: 32px; background: var(--card); text-align: center;
+      transition: background .25s, transform .2s; cursor: default;
+    }
+    .stat-box:hover { background: rgba(123,47,255,.1); transform: translateY(-3px); }
     .stat-number {
       font-family: 'Cinzel Decorative', serif; font-size: 2.5rem; font-weight: 700;
       background: linear-gradient(135deg, var(--accent), var(--accent2));
       -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
     }
-    .stat-label {
-      font-family: 'Share Tech Mono', monospace;
-      font-size: 0.65rem; letter-spacing: 3px; color: var(--muted);
-      text-transform: uppercase; margin-top: 6px;
-    }
+    .stat-label { font-family: 'Share Tech Mono', monospace; font-size: .65rem; letter-spacing: 3px; color: var(--muted); text-transform: uppercase; margin-top: 6px; }
 
-    /* FEATURES */
-    .features-grid {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 2px; background: var(--border);
-    }
-    .feature-box { background: var(--card); padding: 36px 32px; transition: background 0.2s; }
-    .feature-box:hover { background: rgba(123,47,255,0.08); }
+    /* ── FEATURES ── */
+    .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2px; background: var(--border); }
+    .feature-box { background: var(--card); padding: 36px 32px; transition: background .2s, transform .2s; cursor: default; }
+    .feature-box:hover { background: rgba(123,47,255,.08); transform: translateY(-2px); }
     .feature-icon { font-size: 1.8rem; margin-bottom: 16px; }
     .feature-name { font-size: 1.1rem; font-weight: 700; letter-spacing: 1px; color: #fff; margin-bottom: 10px; }
-    .feature-text { font-size: 0.92rem; color: var(--muted); line-height: 1.6; }
+    .feature-text { font-size: .92rem; color: var(--muted); line-height: 1.6; }
 
-    /* FOOTER */
+    /* ── FOOTER ── */
     footer {
       position: relative; z-index: 1; border-top: 1px solid var(--border);
       padding: 40px 48px; display: flex; align-items: center; justify-content: space-between;
@@ -417,7 +354,7 @@
       background: linear-gradient(135deg, var(--accent), var(--accent2));
       -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
     }
-    .footer-copy { font-family: 'Share Tech Mono', monospace; font-size: 0.7rem; color: var(--muted); letter-spacing: 2px; }
+    .footer-copy { font-family: 'Share Tech Mono', monospace; font-size: .7rem; color: var(--muted); letter-spacing: 2px; }
 
     .glow-dot {
       display: inline-block; width: 8px; height: 8px; border-radius: 50%;
@@ -425,29 +362,22 @@
       animation: pulse 2s infinite;
     }
 
-    @keyframes pulse   { 0%,100%{opacity:1} 50%{opacity:0.3} }
-    @keyframes fadeUp  { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
+    @keyframes pulse  { 0%,100%{ opacity:1 } 50%{ opacity:.3 } }
+    @keyframes fadeUp { from{ opacity:0; transform:translateY(24px) } to{ opacity:1; transform:translateY(0) } }
 
-    .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal { opacity: 0; transform: translateY(30px); transition: opacity .7s ease, transform .7s ease; }
     .reveal.visible { opacity: 1; transform: none; }
 
     /* ── FX LAYER ── */
-    #voodoo-canvas {
-      position: fixed; inset: 0; z-index: 0; pointer-events: none;
-      opacity: 0; transition: opacity 0.5s;
-    }
+    #voodoo-canvas { position: fixed; inset: 0; z-index: 0; pointer-events: none; opacity: 0; transition: opacity .5s; }
     body.fx-on #voodoo-canvas { opacity: 1; }
 
-    .floatie {
-      position: fixed; pointer-events: none; z-index: 0;
-      will-change: transform, opacity; user-select: none;
-    }
+    .floatie { position: fixed; pointer-events: none; z-index: 0; will-change: transform, opacity; user-select: none; }
 
     .spark {
       position: fixed; pointer-events: none; z-index: 999;
-      border-radius: 50%; width: 6px; height: 6px;
-      mix-blend-mode: screen;
-      animation: sparkFade 0.7s ease forwards;
+      border-radius: 50%; width: 6px; height: 6px; mix-blend-mode: screen;
+      animation: sparkFade .7s ease forwards;
     }
     @keyframes sparkFade {
       0%   { transform: scale(1) translate(0,0); opacity: 1; }
@@ -472,7 +402,7 @@
 </nav>
 
 <div class="hero">
-  <p class="hero-eyebrow"><span class="glow-dot"></span> &nbsp; Next-gen cheat client</p>
+  <p class="hero-eyebrow"><span class="glow-dot"></span>&nbsp;&nbsp;Next-gen cheat client</p>
   <h1 class="hero-title">VoodooClient</h1>
   <p class="hero-sub">Undetected · Powerful · Free</p>
   <div class="hero-buttons">
@@ -490,6 +420,7 @@
 
   <div class="downloads-grid">
 
+    <!-- CS2 -->
     <div class="download-card reveal">
       <span class="needle-pierce">🪡</span>
       <span class="card-game-badge cs2">🎯 Counter-Strike 2</span>
@@ -498,11 +429,15 @@
       <p class="card-version">v1.0.0 — Latest Build</p>
       <p class="card-desc">Full-featured cheat for Counter-Strike 2. Includes aimbot, wallhack, triggerbot, ESP and more — all packed into an easy-to-use injector.</p>
       <div class="card-tags">
-        <span class="tag">Aimbot</span><span class="tag">ESP</span><span class="tag">Wallhack</span><span class="tag green">Undetected</span>
+        <span class="tag">Aimbot</span>
+        <span class="tag">ESP</span>
+        <span class="tag">Wallhack</span>
+        <span class="tag green">Undetected</span>
       </div>
       <button class="card-dl-btn" onclick="handleDownload(this,'CS2')">⬇ Download CS2</button>
     </div>
 
+    <!-- MC Ghost — two real clickable links -->
     <div class="download-card reveal">
       <span class="needle-pierce">🪡</span>
       <span class="card-game-badge mc">⛏ Minecraft Java</span>
@@ -511,19 +446,27 @@
       <p class="card-version">v1.8.9 — Ghost Edition</p>
       <p class="card-desc">Silent, undetectable Minecraft client for 1.8.9. Built for hypixel-level play with reach, velocity, and killaura designed to bypass most anticheats.</p>
       <div class="card-tags">
-        <span class="tag">KillAura</span><span class="tag">Velocity</span><span class="tag">Reach</span><span class="tag green">Bypass</span>
+        <span class="tag">KillAura</span>
+        <span class="tag">Velocity</span>
+        <span class="tag">Reach</span>
+        <span class="tag green">Bypass</span>
       </div>
       <div class="dl-options">
         <div class="dl-option">
-          <a href="https://direct-link.net/1223974/0T99i058jxf8" target="_blank" rel="noopener noreferrer" class="card-dl-btn">⬇ Linkvertise</a>
+          <a href="https://direct-link.net/1223974/0T99i058jxf8"
+             target="_blank" rel="noopener noreferrer"
+             class="card-dl-btn">⬇ Linkvertise</a>
           <span class="dl-recommended">★ recommended</span>
         </div>
         <div class="dl-option">
-          <a href="https://work.ink/2mME/voodoclient-ghost" target="_blank" rel="noopener noreferrer" class="card-dl-btn alt">⬇ work.ink</a>
+          <a href="https://work.ink/2mME/voodoclient-ghost"
+             target="_blank" rel="noopener noreferrer"
+             class="card-dl-btn alt">⬇ work.ink</a>
         </div>
       </div>
     </div>
 
+    <!-- MC Blatant -->
     <div class="download-card reveal">
       <span class="needle-pierce">🪡</span>
       <span class="card-game-badge mc">⛏ Minecraft Java</span>
@@ -532,11 +475,15 @@
       <p class="card-version">v1.8.9 — Blatant Edition</p>
       <p class="card-desc">No limits. The blatant edition for 1.8.9 is built to dominate — massive reach, full combat modules, fly, and bhop. For when you don't care about hiding it.</p>
       <div class="card-tags">
-        <span class="tag red">Blatant</span><span class="tag">Fly</span><span class="tag">BHop</span><span class="tag">Speed</span>
+        <span class="tag red">Blatant</span>
+        <span class="tag">Fly</span>
+        <span class="tag">BHop</span>
+        <span class="tag">Speed</span>
       </div>
       <button class="card-dl-btn red" onclick="handleDownload(this,'MC Blatant')">⬇ Download Blatant</button>
     </div>
 
+    <!-- Meteor Addon -->
     <div class="download-card addon-card reveal">
       <div>
         <span class="card-game-badge addon">☄ Meteor Addon</span>
@@ -545,7 +492,9 @@
         <p class="card-version">Addon — Requires Meteor Client</p>
         <p class="card-desc">Supercharge your Meteor Client with the VoodooClient addon. Adds exclusive modules, custom GUI elements, and extra bypass tweaks not found in the base Meteor build.</p>
         <div class="card-tags">
-          <span class="tag">Meteor Compatible</span><span class="tag red">Extra Modules</span><span class="tag green">Actively Updated</span>
+          <span class="tag">Meteor Compatible</span>
+          <span class="tag red">Extra Modules</span>
+          <span class="tag green">Actively Updated</span>
         </div>
       </div>
       <div>
@@ -597,19 +546,16 @@
   }, { threshold: 0.1 });
   revEls.forEach(r => revObs.observe(r));
 
-  /* ── DOWNLOAD BUTTON feedback (no innerHTML with user input) ── */
+  /* ── DOWNLOAD BUTTON feedback ── */
   function handleDownload(btn, name) {
-    const orig = btn.textContent;
-    btn.textContent = '✓ Preparing Download...';
+    const orig = btn.textContent.trim();
+    btn.textContent = '✓ Preparing...';
     btn.disabled = true;
-    setTimeout(() => { btn.textContent = '⬇ ' + orig.replace('⬇ ', ''); btn.disabled = false; }, 2000);
+    setTimeout(() => { btn.textContent = orig; btn.disabled = false; }, 2000);
   }
 
-  /* ═══════════════════════════════════════
-     FX TOGGLE  — OFF by default
-  ═══════════════════════════════════════ */
-  let fxOn = false;
-  let spawnTimer = null;
+  /* ── FX TOGGLE — OFF by default ── */
+  let fxOn = false, spawnTimer = null;
 
   function toggleFX() {
     fxOn = !fxOn;
@@ -630,17 +576,17 @@
   /* ── SVG ASSETS ── */
   const DOLL_SVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 70" width="40" height="70">
     <circle cx="20" cy="10" r="8" fill="none" stroke="#7b2fff" stroke-width="1.5" stroke-dasharray="3,2"/>
-    <line x1="16" y1="8"  x2="18" y2="10" stroke="#ff2f7b" stroke-width="1"/>
-    <line x1="18" y1="8"  x2="16" y2="10" stroke="#ff2f7b" stroke-width="1"/>
-    <line x1="22" y1="8"  x2="24" y2="10" stroke="#ff2f7b" stroke-width="1"/>
-    <line x1="24" y1="8"  x2="22" y2="10" stroke="#ff2f7b" stroke-width="1"/>
+    <line x1="16" y1="8" x2="18" y2="10" stroke="#ff2f7b" stroke-width="1"/>
+    <line x1="18" y1="8" x2="16" y2="10" stroke="#ff2f7b" stroke-width="1"/>
+    <line x1="22" y1="8" x2="24" y2="10" stroke="#ff2f7b" stroke-width="1"/>
+    <line x1="24" y1="8" x2="22" y2="10" stroke="#ff2f7b" stroke-width="1"/>
     <path d="M16 13 Q20 16 24 13" fill="none" stroke="#2fffb2" stroke-width="1" stroke-dasharray="2,1.5"/>
     <rect x="18" y="17" width="4" height="5" fill="none" stroke="#7b2fff" stroke-width="1.2"/>
     <rect x="12" y="22" width="16" height="22" rx="2" fill="none" stroke="#7b2fff" stroke-width="1.5" stroke-dasharray="4,2"/>
     <line x1="20" y1="22" x2="20" y2="44" stroke="#ff2f7b" stroke-width="0.8" stroke-dasharray="2,3"/>
     <path d="M17 30 Q17 27 20 29 Q23 27 23 30 Q23 33 20 35 Q17 33 17 30Z" fill="none" stroke="#ff2f7b" stroke-width="0.8"/>
-    <line x1="12" y1="26" x2="4"  y2="36" stroke="#7b2fff" stroke-width="1.5" stroke-dasharray="3,2"/>
-    <circle cx="4"  cy="37" r="2.5" fill="none" stroke="#7b2fff" stroke-width="1"/>
+    <line x1="12" y1="26" x2="4" y2="36" stroke="#7b2fff" stroke-width="1.5" stroke-dasharray="3,2"/>
+    <circle cx="4" cy="37" r="2.5" fill="none" stroke="#7b2fff" stroke-width="1"/>
     <line x1="28" y1="26" x2="36" y2="36" stroke="#7b2fff" stroke-width="1.5" stroke-dasharray="3,2"/>
     <circle cx="36" cy="37" r="2.5" fill="none" stroke="#7b2fff" stroke-width="1"/>
     <line x1="16" y1="44" x2="13" y2="58" stroke="#7b2fff" stroke-width="1.5" stroke-dasharray="3,2"/>
@@ -651,14 +597,14 @@
 
   const MINI_SVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 40" width="24" height="40">
     <circle cx="12" cy="6" r="5" fill="none" stroke="#2fffb2" stroke-width="1.2" stroke-dasharray="2,1.5"/>
-    <line x1="9"  y1="5" x2="11" y2="7"  stroke="#ff2f7b" stroke-width="0.8"/>
-    <line x1="11" y1="5" x2="9"  y2="7"  stroke="#ff2f7b" stroke-width="0.8"/>
-    <line x1="13" y1="5" x2="15" y2="7"  stroke="#ff2f7b" stroke-width="0.8"/>
-    <line x1="15" y1="5" x2="13" y2="7"  stroke="#ff2f7b" stroke-width="0.8"/>
+    <line x1="9" y1="5" x2="11" y2="7" stroke="#ff2f7b" stroke-width="0.8"/>
+    <line x1="11" y1="5" x2="9" y2="7" stroke="#ff2f7b" stroke-width="0.8"/>
+    <line x1="13" y1="5" x2="15" y2="7" stroke="#ff2f7b" stroke-width="0.8"/>
+    <line x1="15" y1="5" x2="13" y2="7" stroke="#ff2f7b" stroke-width="0.8"/>
     <rect x="8" y="11" width="8" height="14" rx="1" fill="none" stroke="#2fffb2" stroke-width="1" stroke-dasharray="2,1.5"/>
-    <line x1="8"  y1="14" x2="3"  y2="20" stroke="#2fffb2" stroke-width="1" stroke-dasharray="2,1"/>
+    <line x1="8" y1="14" x2="3" y2="20" stroke="#2fffb2" stroke-width="1" stroke-dasharray="2,1"/>
     <line x1="16" y1="14" x2="21" y2="20" stroke="#2fffb2" stroke-width="1" stroke-dasharray="2,1"/>
-    <line x1="10" y1="25" x2="8"  y2="35" stroke="#2fffb2" stroke-width="1" stroke-dasharray="2,1"/>
+    <line x1="10" y1="25" x2="8" y2="35" stroke="#2fffb2" stroke-width="1" stroke-dasharray="2,1"/>
     <line x1="14" y1="25" x2="16" y2="35" stroke="#2fffb2" stroke-width="1" stroke-dasharray="2,1"/>
   </svg>`;
 
@@ -677,10 +623,10 @@
   </svg>`;
 
   const TYPES = [
-    { svg: DOLL_SVG,  prob: 0.35, glow: 'rgba(123,47,255,0.6)' },
-    { svg: MINI_SVG,  prob: 0.25, glow: 'rgba(47,255,178,0.5)' },
-    { svg: NDL1_SVG,  prob: 0.22, glow: 'rgba(255,47,123,0.7)' },
-    { svg: NDL2_SVG,  prob: 0.18, glow: 'rgba(123,47,255,0.7)' },
+    { svg: DOLL_SVG, prob: 0.35, glow: 'rgba(123,47,255,0.6)' },
+    { svg: MINI_SVG, prob: 0.25, glow: 'rgba(47,255,178,0.5)' },
+    { svg: NDL1_SVG, prob: 0.22, glow: 'rgba(255,47,123,0.7)' },
+    { svg: NDL2_SVG, prob: 0.18, glow: 'rgba(123,47,255,0.7)' },
   ];
 
   function pickType() {
@@ -704,16 +650,14 @@
     else if (edge < 0.5)  { sx = innerWidth + 40;             sy = Math.random() * innerHeight; }
     else if (edge < 0.75) { sx = Math.random() * innerWidth;  sy = innerHeight + 80; }
     else                  { sx = -60;                         sy = Math.random() * innerHeight; }
-    el.style.left = sx + 'px';
-    el.style.top  = sy + 'px';
+    el.style.left    = sx + 'px';
+    el.style.top     = sy + 'px';
     el.style.opacity = '0';
     document.body.appendChild(el);
     floaties.push({
       el, x: sx, y: sy,
-      vx: (Math.random() - 0.5) * 0.6,
-      vy: (Math.random() - 0.5) * 0.6,
-      rot: Math.random() * 360,
-      rotSpeed: (Math.random() - 0.5) * 0.8,
+      vx: (Math.random() - 0.5) * 0.6, vy: (Math.random() - 0.5) * 0.6,
+      rot: Math.random() * 360, rotSpeed: (Math.random() - 0.5) * 0.8,
       wx: Math.random() * Math.PI * 2, wy: Math.random() * Math.PI * 2,
       wsx: 0.004 + Math.random() * 0.006, wsy: 0.003 + Math.random() * 0.005,
       wax: 0.4 + Math.random() * 0.8,    way: 0.3 + Math.random() * 0.6,
@@ -732,15 +676,11 @@
     floaties.forEach(f => f.maxLife = f.life + 40);
   }
 
-  /* animation loop — always running, just nothing to draw when fx off */
   (function animLoop() {
     for (let i = floaties.length - 1; i >= 0; i--) {
       const f = floaties[i];
       f.life++;
-      if (f.fadingIn) {
-        f.opacity = Math.min(0.85, f.opacity + 0.012);
-        if (f.opacity >= 0.85) f.fadingIn = false;
-      }
+      if (f.fadingIn) { f.opacity = Math.min(0.85, f.opacity + 0.012); if (f.opacity >= 0.85) f.fadingIn = false; }
       if (f.life > f.maxLife - 60) f.opacity -= 0.02;
       f.wx += f.wsx; f.wy += f.wsy;
       f.x += f.vx + Math.sin(f.wx) * f.wax;
@@ -772,11 +712,9 @@
     for (let i = 0; i < 2; i++) {
       particles.push({
         x: e.clientX, y: e.clientY,
-        vx: (Math.random() - 0.5) * 2,
-        vy: (Math.random() - 0.5) * 2 - 1,
+        vx: (Math.random() - 0.5) * 2, vy: (Math.random() - 0.5) * 2 - 1,
         life: 1, decay: 0.02 + Math.random() * 0.03,
-        r: 2 + Math.random() * 3,
-        hue: Math.random() < 0.5 ? '270' : '330',
+        r: 2 + Math.random() * 3, hue: Math.random() < 0.5 ? '270' : '330',
       });
     }
   });

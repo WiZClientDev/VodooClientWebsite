@@ -30,7 +30,7 @@ export default function Hero() {
 
           <h1 className="text-6xl sm:text-7xl md:text-8xl font-black mb-6 tracking-tight">
             <span className="bg-gradient-to-r from-blue-400 via-cyan-300 to-emerald-400 bg-clip-text text-transparent">
-              VoodooClient
+              Voodo
             </span>
           </h1>
 

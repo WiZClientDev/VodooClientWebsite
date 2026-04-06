@@ -31,7 +31,7 @@ export default function Navbar() {
               onClick={() => scrollToSection('home')}
               className="text-xl font-black tracking-tight bg-gradient-to-r from-blue-400 via-cyan-300 to-emerald-400 bg-clip-text text-transparent hover:from-blue-300 hover:via-cyan-200 hover:to-emerald-300 transition-all"
             >
-              VoodooClient
+              Voodo
             </button>
           </div>
 

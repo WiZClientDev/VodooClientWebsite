@@ -9,44 +9,44 @@ interface FAQItem {
 
 const faqs: FAQItem[] = [
   {
-    question: 'Is WiZClient safe to use?',
+    question: 'Is Voodo safe to use?',
     answer:
-      'Yes, WiZClient is completely safe. All downloads are scanned for malware and the client is open-source, meaning anyone can review the code. We prioritize your security and privacy.',
+      'Yes, Voodo is completely safe. All downloads are scanned for malware and the client is open-source, meaning anyone can review the code. We prioritize your security and privacy.',
   },
   {
-    question: 'Will I get banned for using WiZClient?',
+    question: 'Will I get banned for using Voodo?',
     answer:
-      'WiZClient is designed to be compliant with most server rules. However, some features may not be allowed on certain servers. Always check your server\'s rules before using any client modifications.',
+      'Voodo is designed to be compliant with most server rules. However, some features may not be allowed on certain servers. Always check your server\'s rules before using any client modifications.',
   },
   {
     question: 'What Minecraft versions are supported?',
     answer:
-      'WiZClient supports Minecraft versions 1.8.9, 1.12.2, 1.16.5, 1.18.2, and 1.20.x. We regularly update to support new versions as they are released.',
+      'Voodo supports Minecraft versions 1.8.9, 1.12.2, 1.16.5, 1.18.2, and 1.20.x. We regularly update to support new versions as they are released.',
   },
   {
-    question: 'Is WiZClient free?',
+    question: 'Is Voodo free?',
     answer:
-      'Yes! WiZClient is completely free to download and use. There are no hidden costs, subscriptions, or in-app purchases. We believe everyone should have access to quality Minecraft enhancements.',
+      'Yes! Voodo is completely free to download and use. There are no hidden costs, subscriptions, or in-app purchases. We believe everyone should have access to quality Minecraft enhancements.',
   },
   {
-    question: 'Can I use WiZClient with other mods?',
+    question: 'Can I use Voodo with other mods?',
     answer:
-      'Absolutely! WiZClient is compatible with most popular mods. It works seamlessly with Forge and Fabric mod loaders. However, some conflicting mods may cause issues.',
+      'Absolutely! Voodo is compatible with most popular mods. It works seamlessly with Forge and Fabric mod loaders. However, some conflicting mods may cause issues.',
   },
   {
-    question: 'How do I update WiZClient?',
+    question: 'How do I update Voodo?',
     answer:
       'Simply download the latest version from our downloads page and install it. The new version will automatically replace the old one. Your settings and configurations will be preserved.',
   },
   {
     question: 'Where can I get support?',
     answer:
-      'Join our Discord community for support, updates, and to connect with other WiZClient users. Our team and community members are always ready to help with any issues.',
+      'Join our Discord community for support, updates, and to connect with other Voodo users. Our team and community members are always ready to help with any issues.',
   },
   {
-    question: 'Does WiZClient work on servers?',
+    question: 'Does Voodo work on servers?',
     answer:
-      'Yes, WiZClient works on multiplayer servers. However, make sure the features you\'re using are allowed by the server\'s rules. Some competitive servers may have restrictions on certain client modifications.',
+      'Yes, Voodo works on multiplayer servers. However, make sure the features you\'re using are allowed by the server\'s rules. Some competitive servers may have restrictions on certain client modifications.',
   },
 ];
 
@@ -71,7 +71,7 @@ export default function FAQ() {
             FAQ
           </h2>
           <p className="text-gray-400 text-lg">
-            Frequently asked questions about WiZClient
+            Frequently asked questions about Voodo
           </p>
         </motion.div>
 

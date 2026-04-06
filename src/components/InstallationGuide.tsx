@@ -7,19 +7,19 @@ export default function InstallationGuide() {
 
   const instructions = {
     windows: [
-      'Download the WiZClient installer for your Minecraft version',
+      'Download the Voodo installer for your Minecraft version',
       'Run the installer (.exe file) and follow the on-screen instructions',
-      'Launch Minecraft and select the WiZClient profile from the launcher',
+      'Launch Minecraft and select the Voodo profile from the launcher',
       'Enjoy your enhanced Minecraft experience!',
     ],
     mac: [
-      'Download the WiZClient installer for macOS',
-      'Open the .dmg file and drag WiZClient to your Applications folder',
+      'Download the Voodo installer for macOS',
+      'Open the .dmg file and drag Voodo to your Applications folder',
       'Right-click and select "Open" to bypass Gatekeeper (first time only)',
-      'Launch Minecraft and select the WiZClient profile',
+      'Launch Minecraft and select the Voodo profile',
     ],
     linux: [
-      'Download the WiZClient .jar file for your Minecraft version',
+      'Download the Voodo .jar file for your Minecraft version',
       'Move the file to your Minecraft directory: ~/.minecraft/mods/',
       'Make sure you have Java installed (java -version)',
       'Launch Minecraft with the Forge/Fabric profile',
@@ -46,7 +46,7 @@ export default function InstallationGuide() {
             Installation Guide
           </h2>
           <p className="text-gray-400 text-lg">
-            Follow these simple steps to install WiZClient
+            Follow these simple steps to install Voodo
           </p>
         </motion.div>
 
@@ -112,7 +112,7 @@ export default function InstallationGuide() {
           <div className="mt-6 p-4 bg-neon-purple/10 border border-neon-purple/30 rounded-lg">
             <p className="text-sm text-gray-300">
               <strong className="text-neon-purple">Note:</strong> Make sure you have the correct
-              version of Minecraft installed before running WiZClient. For modded versions, ensure
+              version of Minecraft installed before running Voodo. For modded versions, ensure
               Forge or Fabric is properly installed.
             </p>
           </div>

@@ -13,40 +13,13 @@ interface Addon {
 
 const addons: Addon[] = [
   {
-    name: 'Meteor Addon',
-    description: 'Exclusive VoodooClient addon for Meteor Client with advanced modules and custom bypasses',
-    compatibility: 'Meteor Client 1.20.x',
-    version: 'v1.5.2',
-    downloads: '12K+',
+    name: 'Voodoaddon',
+    description: 'Official Voodo addon with advanced modules and custom bypasses',
+    compatibility: 'Voodo All Versions',
+    version: 'v2.0.0',
+    downloads: '25K+',
     downloadUrl: '#',
-    icon: '☄️',
-  },
-  {
-    name: 'Combat Plus',
-    description: 'Enhanced combat modules including advanced aim assist and velocity modifications',
-    compatibility: 'VoodooClient Ghost',
-    version: 'v1.2.0',
-    downloads: '8.5K+',
-    downloadUrl: '#',
-    icon: '⚔️',
-  },
-  {
-    name: 'Movement Pro',
-    description: 'Professional movement enhancements with customizable speed and flight modules',
-    compatibility: 'VoodooClient Blatant',
-    version: 'v2.0.1',
-    downloads: '15K+',
-    downloadUrl: '#',
-    icon: '🚀',
-  },
-  {
-    name: 'Visual Pack',
-    description: 'Complete visual enhancement suite with ESP, tracers, and custom rendering',
-    compatibility: 'All Versions',
-    version: 'v1.8.4',
-    downloads: '20K+',
-    downloadUrl: '#',
-    icon: '👁️',
+    icon: '🎯',
   },
 ];
 

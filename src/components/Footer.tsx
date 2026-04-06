@@ -13,10 +13,10 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="col-span-1 md:col-span-2">
-            <h3 className="font-pixel text-neon-purple text-xl mb-4">WiZClient</h3>
+            <h3 className="font-pixel text-neon-purple text-xl mb-4">Voodo</h3>
             <p className="text-gray-400 mb-4 max-w-md">
-              The ultimate Minecraft enhancement client with powerful features, performance
-              optimization, and exclusive mods.
+              The ultimate gaming enhancement client with powerful features, performance
+              optimization, and exclusive mods for multiple games.
             </p>
             <div className="flex space-x-4">
               <a
@@ -109,9 +109,9 @@ export default function Footer() {
 
         <div className="border-t border-neon-purple/20 mt-8 pt-8 text-center text-gray-500 text-sm">
           <p className="mb-2">
-            WiZClient is not affiliated with Mojang Studios or Microsoft Corporation
+            Voodo is not affiliated with Mojang Studios, Microsoft Corporation, or any game developers
           </p>
-          <p>&copy; {new Date().getFullYear()} WiZClient. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} Voodo. All rights reserved.</p>
         </div>
       </div>
     </footer>

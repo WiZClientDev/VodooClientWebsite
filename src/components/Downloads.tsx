@@ -57,7 +57,7 @@ export default function Downloads() {
             Downloads
           </h2>
           <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-            Choose your Minecraft version and download WiZClient
+            Choose your Minecraft version and download Voodo
           </p>
         </motion.div>
 

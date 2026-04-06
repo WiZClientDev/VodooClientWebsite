@@ -14,7 +14,7 @@ interface Client {
 
 const clients: Client[] = [
   {
-    name: 'VoodooClient Ghost',
+    name: 'Voodo Ghost',
     game: 'Minecraft 1.8.9',
     version: 'v2.1.0',
     description: 'Silent, undetectable client designed for competitive play. Bypasses most anticheats including Hypixel.',
@@ -24,7 +24,7 @@ const clients: Client[] = [
     isRecommended: true,
   },
   {
-    name: 'VoodooClient Blatant',
+    name: 'Voodo Blatant',
     game: 'Minecraft 1.8.9',
     version: 'v2.1.0',
     description: 'Full-featured blatant client with no restrictions. Dominate any server with advanced modules.',

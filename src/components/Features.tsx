@@ -65,11 +65,15 @@ export default function Features() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="font-pixel text-3xl sm:text-4xl md:text-5xl text-neon-purple mb-4">
-            Features
+          <div className="inline-flex items-center space-x-2 bg-cyan-500/10 border border-cyan-500/30 rounded-full px-4 py-2 mb-6">
+            <Zap className="text-cyan-400" size={16} />
+            <span className="text-cyan-400 text-sm font-semibold">CORE FEATURES</span>
+          </div>
+          <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-cyan-400 via-blue-300 to-purple-400 bg-clip-text text-transparent">
+            Powerful Features
           </h2>
           <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-            Packed with powerful features to enhance your Minecraft gameplay
+            Everything you need for the ultimate gaming advantage
           </p>
         </motion.div>
 
@@ -83,10 +87,10 @@ export default function Features() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className="bg-white/5 backdrop-blur-sm border border-neon-purple/20 rounded-xl p-6 hover:border-neon-cyan/50 hover:bg-white/10 transition-all group"
+                className="bg-gradient-to-br from-white/[0.07] to-white/[0.02] backdrop-blur-xl border border-cyan-500/20 rounded-xl p-6 hover:border-cyan-400/50 transition-all duration-300 group"
               >
-                <div className="bg-gradient-to-br from-neon-purple/20 to-neon-cyan/20 w-12 h-12 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                  <Icon className="text-neon-cyan" size={24} />
+                <div className="bg-gradient-to-br from-cyan-500/20 to-blue-500/20 w-14 h-14 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
+                  <Icon className="text-cyan-400" size={24} />
                 </div>
                 <h3 className="text-xl font-semibold text-white mb-2">{feature.title}</h3>
                 <p className="text-gray-400">{feature.description}</p>

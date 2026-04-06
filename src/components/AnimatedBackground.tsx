@@ -36,8 +36,13 @@ export default function AnimatedBackground() {
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      ctx.strokeStyle = 'rgba(168, 85, 247, 0.1)';
-      const gridSize = 50;
+      const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+      gradient.addColorStop(0, 'rgba(59, 130, 246, 0.05)');
+      gradient.addColorStop(0.5, 'rgba(139, 92, 246, 0.05)');
+      gradient.addColorStop(1, 'rgba(16, 185, 129, 0.05)');
+      ctx.strokeStyle = gradient;
+
+      const gridSize = 80;
       for (let x = 0; x < canvas.width; x += gridSize) {
         ctx.beginPath();
         ctx.moveTo(x, 0);
@@ -52,9 +57,17 @@ export default function AnimatedBackground() {
       }
 
       particles.forEach((particle) => {
-        ctx.fillStyle = `rgba(168, 85, 247, ${particle.opacity})`;
+        const particleGradient = ctx.createRadialGradient(
+          particle.x, particle.y, 0,
+          particle.x, particle.y, particle.size * 2
+        );
+        particleGradient.addColorStop(0, `rgba(59, 130, 246, ${particle.opacity})`);
+        particleGradient.addColorStop(0.5, `rgba(139, 92, 246, ${particle.opacity * 0.5})`);
+        particleGradient.addColorStop(1, `rgba(16, 185, 129, 0)`);
+
+        ctx.fillStyle = particleGradient;
         ctx.beginPath();
-        ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+        ctx.arc(particle.x, particle.y, particle.size * 2, 0, Math.PI * 2);
         ctx.fill();
 
         particle.x += particle.speedX;

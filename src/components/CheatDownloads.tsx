@@ -9,35 +9,29 @@ interface Cheat {
   status: 'undetected' | 'detected' | 'maintenance';
   version: string;
   downloadUrl: string;
+  type?: 'EXT' | 'INT';
 }
 
 const cheats: Cheat[] = [
   {
-    name: 'VoodooCS2',
+    name: 'VoodoCS2',
     game: 'Counter-Strike 2',
     description: 'Advanced CS2 cheat with aimbot, wallhack, and triggerbot. Optimized for competitive play with built-in safety features.',
     features: ['Aimbot', 'ESP/Wallhack', 'Triggerbot', 'Radar Hack'],
     status: 'undetected',
     version: 'v3.2.1',
     downloadUrl: '#',
+    type: 'EXT',
   },
   {
-    name: 'VoodooValor',
-    game: 'Valorant',
-    description: 'Powerful Valorant cheat with smooth aim assistance and visual enhancements. Use with caution on main accounts.',
-    features: ['Smooth Aim', 'ESP', 'Agent ESP', 'Recoil Control'],
-    status: 'maintenance',
-    version: 'v2.8.0',
-    downloadUrl: '#',
-  },
-  {
-    name: 'VoodooApex',
-    game: 'Apex Legends',
-    description: 'Complete Apex Legends enhancement suite with advanced prediction and movement assistance.',
-    features: ['Prediction Aim', 'Item ESP', 'Super Glide', 'No Recoil'],
+    name: 'VoodoCS2',
+    game: 'Counter-Strike 2',
+    description: 'Internal CS2 cheat with memory-based features and advanced customization.',
+    features: ['Memory Aimbot', 'Glow ESP', 'Skin Changer', 'Bhop'],
     status: 'undetected',
-    version: 'v4.1.2',
+    version: 'v3.2.1',
     downloadUrl: '#',
+    type: 'INT',
   },
 ];
 
@@ -74,13 +68,13 @@ export default function CheatDownloads() {
         >
           <div className="inline-flex items-center space-x-2 bg-red-500/10 border border-red-500/30 rounded-full px-4 py-2 mb-6">
             <Crosshair className="text-red-400" size={16} />
-            <span className="text-red-400 text-sm font-semibold">GAME CHEATS</span>
+            <span className="text-red-400 text-sm font-semibold">CS2 CHEATS</span>
           </div>
           <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-red-400 via-orange-300 to-amber-400 bg-clip-text text-transparent">
-            Multi-Game Cheats
+            Counter-Strike 2
           </h2>
           <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-            Premium cheats for popular competitive games with regular updates
+            Choose between External or Internal cheats for CS2
           </p>
         </motion.div>
 
@@ -103,7 +97,7 @@ export default function CheatDownloads() {
                 <div className="relative bg-gradient-to-br from-white/[0.07] to-white/[0.02] backdrop-blur-xl border border-red-500/20 hover:border-red-400/40 rounded-xl p-6 transition-all duration-300 h-full flex flex-col">
                   <div className="flex items-start justify-between mb-4">
                     <div>
-                      <h3 className="text-xl font-bold text-white mb-1">{cheat.name}</h3>
+                      <h3 className="text-xl font-bold text-white mb-1">{cheat.name} {cheat.type}</h3>
                       <p className="text-red-400 text-sm font-medium">{cheat.game}</p>
                     </div>
                     <div className={`flex items-center space-x-1 bg-${statusInfo.color}-500/20 border border-${statusInfo.color}-500/30 rounded-full px-3 py-1 text-xs font-semibold text-${statusInfo.color}-400`}>
